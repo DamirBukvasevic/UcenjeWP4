@@ -9,7 +9,7 @@ use testWP4;
 
 
 create table test(
-sifra int not null,
+sifra int not null primary key identity(1,1),
 ime varchar(20) not null,
 prezime varchar(20) not null,
 oib char(11) not null

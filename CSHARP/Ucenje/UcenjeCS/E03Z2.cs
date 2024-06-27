@@ -1,15 +1,19 @@
-﻿namespace UcenjeCS
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace UcenjeCS
 {
     internal class E03Z2
     {
+
         public static void Izvedi()
         {
-            float[] b = new float[2];
-            Console.Write("Unesi prvi broj: ");
-            b[0] = float.Parse(Console.ReadLine());
-            Console.WriteLine("Unesi drugi broj: ");
-            b[1] = float.Parse(Console.ReadLine());
-
+            // Korisnik unosi dva decimalna broja
+            // Program ispisuje Veći ili Jednaki su ako su uneseni brojevi jednaki
         }
+
     }
 }

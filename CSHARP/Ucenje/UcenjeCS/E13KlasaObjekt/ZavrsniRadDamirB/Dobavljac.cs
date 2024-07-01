@@ -14,7 +14,7 @@ namespace UcenjeCS.E13KlasaObjekt.ZavrsniRadDamirB
 
         public string? Grad { get; set; }
 
-        public string? Mjesto { get; set; }
+        public string? Adresa { get; set; }
 
         public string? Oib { get; set; }
     }

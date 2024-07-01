@@ -12,6 +12,6 @@ namespace UcenjeCS.E13KlasaObjekt.ZavrsniRadDamirB
 
         public string? NazivArtikla { get; set; }
 
-        public int? Kolicina { get; set; }
+        public int? Cijena { get; set; }
     }
 }

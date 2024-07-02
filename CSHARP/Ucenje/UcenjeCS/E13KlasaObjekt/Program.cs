@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using UcenjeCS.E13KlasaObjekt.Edunova;
 
 namespace UcenjeCS.E13KlasaObjekt
 {
@@ -45,6 +46,14 @@ namespace UcenjeCS.E13KlasaObjekt
             Console.WriteLine(o.Mjesto?.Naziv ?? "Nema");
 
             Console.WriteLine(o.Mjesto?.Zupanija?.Drzava?.Naziv??"Ne zna, ");
+
+
+            Smjer smjer = new Smjer();
+            smjer.Naziv = "Web programiranje";
+
+            Grupa grupa = new() { Naziv = "WP4",Smjer=smjer };
+
+            Console.WriteLine(grupa);
 
 
         }

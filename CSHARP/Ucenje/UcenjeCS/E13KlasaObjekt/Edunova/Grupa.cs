@@ -14,5 +14,7 @@ namespace UcenjeCS.E13KlasaObjekt.Edunova
         public string? Predavac { get; set; }
         public int? MaksimalnoPolaznika { get; set; }
 
+        public Polaznik[]? Polaznici { get; set; }
+
     }
 }

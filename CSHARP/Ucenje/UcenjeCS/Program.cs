@@ -1,7 +1,9 @@
 ﻿using UcenjeCS;
 using UcenjeCS.E13KlasaObjekt;
 
-new UcenjeCS.E15RadSaStringovima.Program();
+new UcenjeCS.E16GenericiLambdaEkstenzije.Program();
+
+//new UcenjeCS.E15RadSaStringovima.Program();
 
 //new UcenjeCS.E14Nasljedivanje.Program();
 

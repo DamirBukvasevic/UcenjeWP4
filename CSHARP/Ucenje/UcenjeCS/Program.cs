@@ -1,4 +1,8 @@
 ﻿using UcenjeCS;
+//using UcenjeCS.ZavrsniRadDamirB;
+
+//new UcenjeCS.ZavrsniRadDamirB.GlavniIzbornik();
+
 using UcenjeCS.E13KlasaObjekt;
 
 new UcenjeCS.E18KonzolnaAplikacija.Izbornik();

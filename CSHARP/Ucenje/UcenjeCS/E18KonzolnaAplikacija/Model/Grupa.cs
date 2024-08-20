@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace UcenjeCS.E18KonzolnaAplikacija.Model
+﻿namespace UcenjeCS.E18KonzolnaAplikacija.Model
 {
     internal class Grupa:Entitet
     {
@@ -13,7 +7,6 @@ namespace UcenjeCS.E18KonzolnaAplikacija.Model
         public string? Predavac { get; set; }
         public int? MaksimalnoPolaznika { get; set; }
         public List<Polaznik>? Polaznici { get; set; }
-
 
     }
 }

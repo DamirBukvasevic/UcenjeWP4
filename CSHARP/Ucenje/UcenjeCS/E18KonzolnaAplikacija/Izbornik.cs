@@ -1,20 +1,22 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using UcenjeCS.E13KlasaObjekt.Edunova;
 
 namespace UcenjeCS.E18KonzolnaAplikacija
 {
     internal class Izbornik
     {
-        public ObradaSmjer ObradaSmjer { get; set; } = new ObradaSmjer();
 
-        public Izbornik()
+        public ObradaSmjer ObradaSmjer { get; set; }  // da ne mora raditi instancu u konstruktoru
+        public ObradaPolaznik ObradaPolaznik { get; set; } 
+        public ObradaGrupa ObradaGrupa { get; set; } 
+
+        public Izbornik() 
         {
+            Pomocno.DEV = true;
+            ObradaSmjer = new ObradaSmjer();
+            ObradaPolaznik = new ObradaPolaznik();
+            ObradaGrupa = new ObradaGrupa(this); 
             PozdravnaPoruka();
             PrikaziIzbornik();
-
         }
 
         private void PrikaziIzbornik()
@@ -29,6 +31,7 @@ namespace UcenjeCS.E18KonzolnaAplikacija
 
         private void OdabirOpcijeIzbornika()
         {
+            
             switch(Pomocno.UcitajRasponBroja("Odaberite stavku izbornika", 1, 4))
             {
                 case 1:
@@ -36,8 +39,18 @@ namespace UcenjeCS.E18KonzolnaAplikacija
                     ObradaSmjer.PrikaziIzbornik();
                     PrikaziIzbornik();
                     break;
+                case 2:
+                    Console.Clear();
+                    ObradaPolaznik.PrikaziIzbornik();
+                    PrikaziIzbornik();
+                    break;
+                case 3:
+                    Console.Clear();
+                    ObradaGrupa.PrikaziIzbornik();
+                    PrikaziIzbornik();
+                    break;
                 case 4:
-                    Console.WriteLine("Hvala na korištenju aplikacije, doviđenja");
+                    Console.WriteLine("Hvala na korištenju aplikacije, doviđenja!");
                     break;
             }
         }

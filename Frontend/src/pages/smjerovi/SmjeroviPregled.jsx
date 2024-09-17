@@ -1,9 +1,11 @@
-import { Container, Table } from "react-bootstrap"
+import { Button, Container, Table } from "react-bootstrap"
 import SmjerService from "../../services/SmjerService"
 import { useEffect, useState } from "react";
 import { NumericFormat } from "react-number-format";
 import moment from "moment";
 import { GrValidate } from "react-icons/gr";
+import { Link } from "react-router-dom";
+import { RoutesNames } from "../../constants";
 
 
 export default function SmjeroviPregled(){
@@ -35,8 +37,21 @@ export default function SmjeroviPregled(){
         return 'red';
     }
 
+    async function obrisiAsync(sifra){
+        const odgovor = await SmjerService.obrisi(sifra);
+        if(odgovor.greska){
+            alert(odgovor.poruka)
+            return;
+        }
+    }
+
+    function obrisi(sifra){
+        obrisiAsync(sifra);
+    }
+
     return(
         <Container>
+            <Link to={RoutesNames.SMJER_NOVI}>Dodaj novi smjer</Link>
             <Table striped bordered hover responsive>
                 <thead>
                     <tr>
@@ -79,7 +94,19 @@ export default function SmjeroviPregled(){
                                     color={vaucer(smjer.vaucer)}
                                 />
                             </td>
-                            <td>{smjer.sifra}</td>
+                            <td>
+                            <Button
+                                variant="primary"
+                                onClick={()=>Navigate(`/smjerovi/${smjer.sifra}`)}>
+                                    Promjeni
+                                </Button>
+                                &nbsp;&nbsp;&nbsp;
+                                <Button
+                                variant="danger"
+                                onClick={()=>obrisi(smjer.sifra)}>
+                                    Obriši
+                                </Button>
+                            </td>
                         </tr>
                     ))}
                 </tbody>

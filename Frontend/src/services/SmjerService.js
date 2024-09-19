@@ -10,32 +10,52 @@ async function get(){
     .catch((e)=>{console.error(e)})
 }
 
-async function obrisi(sifra){
-    return await HttpService.delete('/Smjer/' + sifra)
-    .then((odgovor) =>{
-        //console.log(e);
-        return {greska: false, poruka: odgovor.data.poruka}
+async function getBySifra(sifra){
+    return await HttpService.get('/Smjer/' + sifra)
+    .then((odgovor)=>{
+        return {greska: false, poruka: odgovor.data}
     })
     .catch((e)=>{
-        //console.log(e);
-        return {greska: true, poruka: 'Smjer se ne može obrisati'}
+        return {greska: true, poruka: 'Ne postoji smjer!'}
     })
 }
 
-async function promjena(smjer){
-    return await HttpService.post('/Smjer/' , smjer)
-    .then((odgovor) =>{
-        //console.log(e);
+async function obrisi(sifra) {
+    return await HttpService.delete('/Smjer/' + sifra)
+    .then((odgovor)=>{
+        //console.log(odgovor);
         return {greska: false, poruka: odgovor.data}
     })
     .catch((e)=>{
         //console.log(e);
-        return {greska: true, poruka: 'Smjer se može dodati'}
+        return {greska: true, poruka: 'Smjer se ne može obrisati!'}
+    })
+}
+
+async function dodaj(smjer) {
+    return await HttpService.post('/Smjer',smjer)
+    .then((odgovor)=>{
+        return {greska: false, poruka: odgovor.data}
+    })
+    .catch((e)=>{
+        return {greska: true, poruka: 'Smjer se ne može dodati!'}
+    })
+}
+
+async function promjena(sifra,smjer) {
+    return await HttpService.put('/Smjer/' + sifra,smjer)
+    .then((odgovor)=>{
+        return {greska: false, poruka: odgovor.data}
+    })
+    .catch((e)=>{
+        return {greska: true, poruka: 'Smjer se ne može promjeniti!'}
     })
 }
 
 export default{
     get,
+    getBySifra,
     obrisi,
+    dodaj,
     promjena
 }

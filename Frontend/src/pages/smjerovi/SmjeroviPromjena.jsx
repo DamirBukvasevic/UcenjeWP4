@@ -1,19 +1,36 @@
 import { Button, Col, Container, Form, Row } from "react-bootstrap";
-import { Link, useNavigate } from "react-router-dom";
+import { Link, useNavigate, useParams } from "react-router-dom";
 import { RoutesNames } from "../../constants";
 import moment from "moment";
 import SmjerService from "../../services/SmjerService";
+import { useEffect, useState } from "react";
 
 
 
-export default function SmjeroviDodaj(){
+export default function SmjeroviPromjena(){
 
     const navigate = useNavigate();
+    const routeParams = useParams();
+    const [smjer,setSmjer] = useState({});
 
-    async function dodaj(smjer){
+    async function dohvatiSmjer(){
+        const odgovor = await SmjerService.getBySifra(routeParams.sifra);
+        if(odgovor.greska){
+            alert(odgovor.poruka);
+            return;
+        }
+        odgovor.poruka.izvodiSeOd = moment.utc(odgovor.poruka.izvodiSeOd).format('yyyy-MM-DD');
+        setSmjer(odgovor.poruka);
+    }
+
+    useEffect(()=>{
+        dohvatiSmjer();
+    },[]);
+
+    async function promjena(smjer){
         //console.log(smjer);
         //console.log(JSON.stringify(smjer));
-        const odgovor = await SmjerService.dodaj(smjer);
+        const odgovor = await SmjerService.promjena(routeParams.sifra,smjer);
         if(odgovor.greska){
             alert(odgovor.poruka);
             return;
@@ -26,7 +43,7 @@ export default function SmjeroviDodaj(){
 
         const podaci = new FormData(e.target);
 
-        dodaj({
+        promjena({
             naziv: podaci.get('naziv'), // 'naziv' je došao iz atributa name od Form.Control
             trajanje: parseInt(podaci.get('trajanje')),
             cijena: parseFloat(podaci.get('cijena')),
@@ -38,31 +55,36 @@ export default function SmjeroviDodaj(){
 
     return(
         <Container>
-            Dodavanje novog smjera
+            Promjena smjera
             
             <Form onSubmit={obradiSubmit}>
                 <Form.Group controlId="naziv">
                     <Form.Label>Naziv</Form.Label>
-                    <Form.Control type="text" name="naziv" required />
+                    <Form.Control type="text" name="naziv" required 
+                    defaultValue={smjer.naziv} />
                 </Form.Group>
 
                 <Form.Group controlId="trajanje">
                     <Form.Label>Trajanje</Form.Label>
-                    <Form.Control type="number" name="trajanje" min={0} max={500} />
+                    <Form.Control type="number" name="trajanje" min={0} max={500} 
+                    defaultValue={smjer.trajanje}/>
                 </Form.Group>
 
                 <Form.Group controlId="cijena">
                     <Form.Label>Cijena</Form.Label>
-                    <Form.Control type="number" name="cijena" step={0.01}/>
+                    <Form.Control type="number" name="cijena" step={0.01}
+                    defaultValue={smjer.cijena}/>
                 </Form.Group>
 
                 <Form.Group controlId="izvodiSeOd">
                     <Form.Label>Izvodi se od</Form.Label>
-                    <Form.Control type="date" name="izvodiSeOd"  />
+                    <Form.Control type="date" name="izvodiSeOd"  
+                    defaultValue={smjer.izvodiSeOd}/>
                 </Form.Group>
 
                 <Form.Group controlId="vaucer">
-                    <Form.Check label="Vaučer" name="vaucer" />
+                    <Form.Check label="Vaučer" name="vaucer" 
+                    defaultChecked={smjer.vaucer}/>
                 </Form.Group>
 
 
@@ -76,7 +98,7 @@ export default function SmjeroviDodaj(){
                     </Col>
                     <Col xs={6} sm={6} md={9} lg={6} xl={6} xxl={6}>
                     <Button variant="primary" type="submit" className="siroko">
-                        Dodaj novi smjer
+                        Promjeni smjer
                     </Button>
                     </Col>
                 </Row>

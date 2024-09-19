@@ -8,4 +8,4 @@ export default function Pocetna(){
             Dobrodošli, kasnije će biti nešto pametnije ovdje!
         </Container>
     )
-};
+}
